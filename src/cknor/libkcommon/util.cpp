@@ -48,7 +48,7 @@ double get_bic(const std::vector<double>& dist_v, const size_t nrow,
     printf("Distance sum: %f\n", bic);
 #endif
 
-    return 2*bic + log(nrow)*ncol*k;
+    return 2*bic + std::log(static_cast<double>(nrow))*ncol*k;
 }
 
 void spherical_projection(double* data, const size_t nrow,
@@ -61,7 +61,7 @@ void spherical_projection(double* data, const size_t nrow,
         for (unsigned col = 0; col < ncol; col++)
             norm2 += (data[row]*data[row]);
         for (unsigned col = 0; col < ncol; col++)
-            data[col] = data[col]/sqrt(norm2);
+            data[col] = data[col]/std::sqrt(norm2);
     }
 }
 

@@ -1,4 +1,4 @@
-25095a39587f66c3fec696ee5f22f721 *DESCRIPTION
+aae4d0f2c6c37a60dc7e3468216e5d98 *DESCRIPTION
 e5370d7a712351a4f98e219a32ad9d43 *NAMESPACE
 ce1f84ef1b5c95d02260a93a084077d3 *R/data.R
 e9c34c1e54d62e7fb3688f1bc530b2c5 *R/knor.R
@@ -66,8 +66,8 @@ ebeab454ef5dc14ad747c52d256bd6c1 *src/cknor/libkcommon/thd_safe_bool_vector.cpp
 84bf1c2030966a0bb159330dfc62c574 *src/cknor/libkcommon/unit-test/test_clusters.cpp
 04de8eb7619d6738c7c62814ad09d6f5 *src/cknor/libkcommon/unit-test/test_reader.cpp
 baaeadebf3b7991c00362a63f732d542 *src/cknor/libkcommon/unit-test/test_thd_safe_bool_vector.cpp
-96587c7353c8a54a9e5df24067396ba1 *src/cknor/libkcommon/util.cpp
-b5540bd33d5ce1bfc99f226d90847632 *src/cknor/libkcommon/util.hpp
+8d1e9e6aa3e0395570f787f6a21d30ad *src/cknor/libkcommon/util.cpp
+ca4cf970d6d9385b898ab7a68377d397 *src/cknor/libkcommon/util.hpp
 5c7d6d61b51f905827f8a230259d0c57 *src/cknor/libman/Makefile
 b0d10d39be59a5742ebb19d25f99ebd8 *src/cknor/libman/base_kmeans_coordinator.cpp
 91d544a203c252f74cd52080dbb689de *src/cknor/libman/base_kmeans_coordinator.hpp
