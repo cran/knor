@@ -1,5 +1,5 @@
 Package: knor
-Version: 0.0-5
+Version: 0.0-5.1
 Date: 2018-03-08
 Title: Non-Uniform Memory Access ('NUMA') Optimized, Parallel K-Means
 Authors@R: c(person("Disa", "Mhembere", role = c("aut", "cre"), email = "disa@jhu.edu"), person("Neurodata (https://neurodata.io)", role="cph"))
@@ -15,12 +15,9 @@ Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
 Suggests: testthat
-Packaged: 2018-03-08 20:56:24 UTC; disa
+Packaged: 2018-08-06 04:43:10 UTC; ripley
 Author: Disa Mhembere [aut, cre],
   Neurodata (https://neurodata.io) [cph]
 Maintainer: Disa Mhembere <disa@jhu.edu>
-X-CRAN-Comment: Archived on 2018-01-25 as the undeclared requirement of
-        OpenMP was not corrected despite reminders. Unarchived on
-        2018-01-31, but archived again for the same reason.
 Repository: CRAN
-Date/Publication: 2018-03-11 22:28:49 UTC
+Date/Publication: 2018-08-06 06:43:30

@@ -1,4 +1,4 @@
-bd470ca96faf1e8f69dae38247d62090 *DESCRIPTION
+15e62d647e0bdb36850b09bcede62126 *DESCRIPTION
 e5370d7a712351a4f98e219a32ad9d43 *NAMESPACE
 ce1f84ef1b5c95d02260a93a084077d3 *R/data.R
 e9c34c1e54d62e7fb3688f1bc530b2c5 *R/knor.R
@@ -11,7 +11,7 @@ d41d8cd98f00b204e9800998ecf8427e *configure.win
 76f8de1d60481891b6f7d111ac329505 *man/Kmeans.Rd
 b67c46f9a7a4a30002a8b3e802467ef2 *man/test_centroids.Rd
 bdad54d7194ddb3df461703ae04adc02 *man/test_data.Rd
-7e176bfda8de14087865bbd34fc6968e *src/Makevars.in
+7e950ed98964ec3ea44e252d240acfee *src/Makevars.in
 d352458cad6f943259c141d2cb58b087 *src/Makevars.win
 52c3e091f47ec29e6b31be625f0db264 *src/cknor/Dockerfile
 3b83ef96387f14655fc854ddc3c6bd57 *src/cknor/LICENSE
