@@ -21,10 +21,7 @@
 #define __KNORI_HPP__
 
 #include "io.hpp"
-#ifdef __unix__
-#include "kmeans.hpp"
-namespace kpmomp = kpmeans::omp;
-#endif
+#include "../libauto/kmeans.hpp"
 
 #include "kmeans_coordinator.hpp"
 #include "kmeans_task_coordinator.hpp"
@@ -33,6 +30,10 @@ namespace kpmomp = kpmeans::omp;
 #ifdef USE_NUMA
 #include "numa_reorg.hpp"
 namespace kpmbind = kpmeans::binding;
+#endif
+
+#ifdef _OPENMP
+namespace kpmomp = kpmeans::omp;
 #endif
 
 namespace kpmprune = kpmeans::prune;
@@ -54,7 +55,7 @@ kmeans_t kmeans(double* data, const size_t nrow,
 
     kmeans_t ret;
 
-#ifdef __unix__
+#ifdef _OPENMP
     if (omp) {
         std::vector<double> centroids (k*ncol);
         std::fill(centroids.begin(), centroids.end(), 0);
@@ -90,7 +91,7 @@ kmeans_t kmeans(double* data, const size_t nrow,
         } else {
             ret = kc->run_kmeans(data);
         }
-#if __unix__
+#if _OPENMP
     }
 #endif
 
@@ -111,7 +112,7 @@ kmeans_t kmeans(const std::string datafn, const size_t nrow,
 
     kmeans_t ret;
 
-#ifdef __unix__
+#ifdef _OPEMP
     if (omp) {
         // Read all the data
         std::vector<double> data(nrow*ncol);
@@ -138,7 +139,7 @@ kmeans_t kmeans(const std::string datafn, const size_t nrow,
                     datafn, nrow, ncol, k, max_iters, nnodes, nthread, p_centers,
                     init, tolerance, dist_type);
         ret = kc->run_kmeans();
-#ifdef __unix__
+#ifdef _OPEMP
     }
 #endif
 

@@ -43,7 +43,7 @@ namespace {
 static size_t NUM_COLS;
 static size_t K;
 static size_t NUM_ROWS;
-short OMP_MAX_THREADS;
+short OMP_MAX_THREADS = 1;
 static size_t g_num_changed = 0;
 static struct timeval start, end;
 static kpmbase::init_type_t g_init_type;
@@ -234,7 +234,8 @@ static void EM_step(const double* matrix, kpmbase::clusters::ptr cls,
         }
         cluster_assignments[row] = asgnd_clust;
 #ifdef _OPENMP
-        pt_cl[omp_get_thread_num()]->add_member(&matrix[row*NUM_COLS], asgnd_clust);
+        pt_cl[omp_get_thread_num()]->add_member(
+                &matrix[row*NUM_COLS], asgnd_clust);
 #else
         pt_cl[0]->add_member(&matrix[row*NUM_COLS], asgnd_clust);
 #endif
@@ -287,16 +288,17 @@ kpmbase::kmeans_t compute_kmeans(const double* matrix, double* clusters_ptr,
     NUM_COLS = num_cols;
     K = k;
     NUM_ROWS = num_rows;
+#ifdef _OPENMP
     if (!max_threads)
         max_threads = 1;
-
-#ifdef _OPENMP
-    OMP_MAX_THREADS = std::min(max_threads, kpmbase::get_num_omp_threads());
-    omp_set_num_threads(OMP_MAX_THREADS);
 #else
-    OMP_MAX_THREADS = 1;
+    max_threads = 1;
 #endif
 
+    OMP_MAX_THREADS = std::min(max_threads, kpmbase::get_num_omp_threads());
+#ifdef _OPENMP
+    omp_set_num_threads(OMP_MAX_THREADS);
+#endif
 #ifndef BIND
     printf("Running on %i threads!\n", OMP_MAX_THREADS);
 #endif
