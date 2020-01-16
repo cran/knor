@@ -32,11 +32,8 @@
 namespace kpmbind = kpmeans::binding;
 #endif
 
-#ifdef _OPENMP
-namespace kpmomp = kpmeans::omp;
-#endif
-
 namespace kpmprune = kpmeans::prune;
+namespace kpmomp = kpmeans::omp;
 
 namespace kpmeans { namespace base {
     // NOTE: It is the callers job to allocate/free data & p_centers

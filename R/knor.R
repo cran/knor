@@ -35,10 +35,6 @@
 #' @param tolerance The convergence tolerance
 #' @param dist.type What dissimilarity metric to use
 #' @param omp Use (slower) OpenMP threads rather than pthreads
-#' @param numa.opt When passing \emph{data} as an in-memory data matrix you can
-#'  optimize memory placement for Linux NUMA machines. \strong{NOTE:}
-#'  performance may degrade with very large data & it requires
-#'  2*memory of that without this.
 #'
 #' @return A list containing the attributes of the output of kmeans.
 #'  cluster: A vector of integers (from 1:\strong{k}) indicating the cluster to
@@ -61,10 +57,11 @@ Kmeans <- function(data, centers, nrow=-1, ncol=-1,
                    iter.max=.Machine$integer.max, nthread=-1,
                    init=c("kmeanspp", "random", "forgy", "none"),
                    tolerance=1E-6, dist.type=c("eucl", "cos"),
-                   omp=FALSE, numa.opt=FALSE) {
+                   omp=FALSE) {
 
-    if (class(data) == "character") {
-        if (class(centers) == "numeric" || class(centers) == "integer") {
+    if (inherits(data, "character")) {
+        if (inherits(centers, "numeric") ||
+            inherits(centers, "integer")) {
             ret <- .Call("R_knor_kmeans", normalizePath(as.character(data)),
                          as.integer(centers), as.double(nrow),
                          as.double(ncol),
@@ -72,7 +69,7 @@ Kmeans <- function(data, centers, nrow=-1, ncol=-1,
                          as.character(init), as.double(tolerance),
                          as.character(dist.type), as.logical(omp),
                          PACKAGE="knor")
-        } else if (class(centers) == "matrix") {
+        } else if (inherits(centers, "matrix")) {
             ret <- .Call("R_knor_kmeans_centroids_im",
                          normalizePath(as.character(data)),
                          as.matrix(centers), as.double(nrow),
@@ -80,8 +77,7 @@ Kmeans <- function(data, centers, nrow=-1, ncol=-1,
                          as.double(tolerance),
                          as.character(dist.type), as.logical(omp),
                          PACKAGE="knor")
-        }
-        else if (class(centers) == "list") {
+        } else if (inherits(centers, "list")) {
             ret <- .Call("R_knor_kmeans_data_centroids_em",
                          normalizePath(as.character(data)),
                          normalizePath(as.character(centers[1])),
@@ -94,30 +90,27 @@ Kmeans <- function(data, centers, nrow=-1, ncol=-1,
         } else {
             stop(paste("Cannot handle centers of type", class(centers), "\n"))
         }
-    } else if (class(data) == "matrix") {
-        if (class(centers) == "numeric" || class(centers) == "integer") {
+    } else if (inherits(data, "matrix")) {
+        if (inherits(centers, "numeric") || inherits(centers, "integer")) {
             ret <- .Call("R_knor_kmeans_data_im", as.matrix(data),
                          as.integer(centers),
                          as.double(iter.max), as.integer(nthread),
                          as.character(init), as.double(tolerance),
                          as.character(dist.type), as.logical(omp),
-                         as.logical(numa.opt),
                          PACKAGE="knor")
-        } else if (class(centers) == "matrix") {
+        } else if (inherits(centers, "matrix")) {
             ret <- .Call("R_knor_kmeans_data_centroids_im", as.matrix(data),
                          as.matrix(centers),
                          as.double(iter.max), as.integer(nthread),
                          as.double(tolerance),
                          as.character(dist.type), as.logical(omp),
-                         as.logical(numa.opt),
                          PACKAGE="knor")
-        } else if (class(centers) == "character") {
+        } else if (inherits(centers, "character")) {
             ret <- .Call("R_knor_kmeans_data_im_centroids_em", as.matrix(data),
                          normalizePath(centers),
                          as.double(iter.max), as.integer(nthread),
                          as.double(tolerance),
                          as.character(dist.type), as.logical(omp),
-                         as.logical(numa.opt),
                          PACKAGE="knor")
         } else {
             stop(paste("Cannot handle centers of type", class(centers), "\n"))
